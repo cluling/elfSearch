@@ -4,7 +4,7 @@
 void push(char *fname);
 void pop();
 char *next();
-void rewind();
+void reset();
 void cleanup();
 
 #endif

@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-static struct {
-    size_t size = 0;
-    char *top = 0;
-    char *index = 0;
-}stack;
 
 struct name{
     struct name *fwd;
     char buff[257];
-}
+};
+
+static struct name *top = 0;
+static struct name *idx = 0;
 
 void push(char *fname)
 {
@@ -19,11 +17,12 @@ void push(char *fname)
     struct name *old;
 
     if((strlen(fname) == 0) || (strlen(fname) > 256)){
-        error("stack.c", 21, "invalid name length.");
+        error("c", 21, "invalid name length.");
     }
-    old = stack.top;
+    old = top;
     new = malloc(sizeof(struct name));
-    stack.top = new;
+    top = new;
+    idx = new;
     new->fwd = old;
     strcpy(new->buff, fname);
 }
@@ -32,36 +31,35 @@ void pop()
 {
     struct name *old;
 
-    if(!stack.top){
+    old = top;
+    if(!old){
     
         return;
     }
-    old = stack.top;
-    stack.top = old->fwd;
+    top = old->fwd;
+    idx = old->fwd;
     free(old);
 }
 
 char *next()
 {
+   char *str = 0; 
 
-
-
-
-
-
+   if(idx){
+       str = idx->buff;
+       idx = idx->fwd;
+   }
+   return str;
 }
 
-void rewind()
+void reset()
 {
-    stack.index = stack.top;
+    idx = top;
 }
 
 void cleanup()
 {
-
-
-
-
-
-
+    while(top){
+        pop();
+    }
 }
