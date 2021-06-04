@@ -2,8 +2,11 @@ CC=gcc
 OPT=-v -Wall -g
 
 
-test: test.c utilities.o stack.o test.o
-	$(CC) $(OPT) -o test utilities.o stack.o test.c
+test: test.c utilities.o elf.o stack.o test.o
+	$(CC) $(OPT) -o test utilities.o elf.o stack.o test.c
+
+elf: utilities.h elf.h elf.c
+	$(CC) $(OPT) -o elf.o -c elf.c
 
 stack: utilities.h stack.h stack.c
 	$(CC) $(OPT) -o stack.o -c stack.c
