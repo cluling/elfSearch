@@ -1,13 +1,12 @@
 #ifndef ELF_H
 #define ELF_H
-//#include <stdint.h>
 #include <elf.h>
 
 typedef struct Elf{
     int fd;
-    struct Elf32_Ehdr *elf_hdr;
-    struct Elf32_Shdr *shtab;
-    const char *shstrtab;
+    Elf32_Ehdr *elf_hdr;
+    Elf32_Shdr *shtab;
+    char *shstrtab;
 }Elf;
 
 Elf *open_elf(int fd);
