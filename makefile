@@ -18,7 +18,7 @@ utilities: utilities.h utilities.c
 	$(CC) $(OPT) -o utilities.o -c utilities.c
 
 valgrind: 
-	valgrind --leak-check=full --show-leak-kinds=all ./elfSearch
+	valgrind --leak-check=full --show-leak-kinds=all ./elfSearch -r /home/christianluling/testing/xiamoi/ax1800-wireless-router/sysroot -s tbus_connect
 
 clean:
 	rm *.o; rm *.o 2>/dev/null; rm elfSearch 2>/dev/null
